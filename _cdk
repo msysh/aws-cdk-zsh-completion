@@ -1,0 +1,28 @@
+#compdef cdk
+
+_cdk() {
+
+  if [[ ${words[@]} =~ "--require-approval[^\S]+[^-]*$" ]] then
+    compadd never any-change broadening
+    return 0
+  elif [[ ${words[@]} =~ "--progress[^\S]+[^-]*$" ]] then
+    compadd bar events
+    return 0
+  elif [[ ${words[@]} =~ "(-l|--language)[^\S]+[^-]*$" ]] then
+    compadd csharp fsharp go java javascript python typescript
+    return 0
+  elif [[ ${words[@]} =~ "(-m|--method)[^\S]+[^-]*$" ]] then
+    compadd direct change-set prepare-change-set
+    return 0
+  fi
+
+  local reply
+  local si=$IFS
+  IFS=$'\n'
+  reply=($(COMP_CWORD="$(($CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" cdk --get-yargs-completions "${words[@]}"))
+  IFS=$si
+
+  _describe 'values' reply
+}
+
+_cdk "$@"
