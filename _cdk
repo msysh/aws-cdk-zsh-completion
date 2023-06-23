@@ -2,16 +2,20 @@
 
 _cdk() {
 
-  if [[ ${words[@]} =~ "--require-approval[^\S]+[^-]*$" ]] then
+  if [[ ${words[@]} =~ --require-approval\ +$ ]]; then
+    # In case of "deploy"
     compadd never any-change broadening
     return 0
-  elif [[ ${words[@]} =~ "--progress[^\S]+[^-]*$" ]] then
+  elif [[ ${words[@]} =~ --progress\ +$ ]]; then
+    # In case of "deploy" or "watch"
     compadd bar events
     return 0
-  elif [[ ${words[@]} =~ "(-l|--language)[^\S]+[^-]*$" ]] then
+  elif [[ ${words[@]} =~ (--language|-l)\ +$ ]]; then
+    # In case of "init"
     compadd csharp fsharp go java javascript python typescript
     return 0
-  elif [[ ${words[@]} =~ "(-m|--method)[^\S]+[^-]*$" ]] then
+  elif [[ ${words[@]} =~ (--method|-m)\ +$ ]]; then
+    # In case of "deploy"
     compadd direct change-set prepare-change-set
     return 0
   fi
