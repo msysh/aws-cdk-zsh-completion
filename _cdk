@@ -10,6 +10,10 @@ _cdk() {
     # In case of "deploy" or "watch"
     compadd bar events
     return 0
+  elif [[ ${words[@]} =~ --package-manager\ +[^\ -]*$ ]]; then
+    # In case of "init"
+    compadd npm yarn pnpm bun
+    return 0
   elif [[ ${words[@]} =~ (--language|-l)\ +[^\ -]*$ ]]; then
     # In case of "init"
     compadd csharp fsharp go java javascript python typescript

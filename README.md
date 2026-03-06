@@ -39,6 +39,7 @@ If it doesn't work, deleting `~/.zcompdump` file may work
 ## Reference
 
 This topic is discussed at [AWS CDK offical repo](https://github.com/aws/aws-cdk/). I was inspired from it.
+
 https://github.com/aws/aws-cdk/discussions/24380#discussioncomment-5158176
 
 ## License
