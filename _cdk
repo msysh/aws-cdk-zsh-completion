@@ -19,8 +19,14 @@ _cdk() {
     compadd csharp fsharp go java javascript python typescript
     return 0
   elif [[ ${words[@]} =~ (--method|-m)\ +[^\ -]*$ ]]; then
-    # In case of "deploy"
-    compadd direct change-set prepare-change-set
+    case ${words[2]} in
+      deploy)
+        compadd direct change-set prepare-change-set execute-change-set
+        ;;
+      diff)
+        compadd auto change-set template
+        ;;
+    esac
     return 0
   fi
 
