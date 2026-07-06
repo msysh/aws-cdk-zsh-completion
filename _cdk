@@ -15,8 +15,14 @@ _cdk() {
     compadd npm yarn pnpm bun
     return 0
   elif [[ ${words[@]} =~ (--language|-l)\ +[^\ -]*$ ]]; then
-    # In case of "init"
-    compadd csharp fsharp go java javascript python typescript
+    case ${words[2]} in
+      init)
+        compadd csharp cs fsharp fs go java javascript js python py typescript ts
+        ;;
+      migrate)
+        compadd typescript ts go java python py csharp cs
+        ;;
+    esac
     return 0
   elif [[ ${words[@]} =~ (--method|-m)\ +[^\ -]*$ ]]; then
     case ${words[2]} in
